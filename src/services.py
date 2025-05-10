@@ -9,6 +9,7 @@ def detect_hourly_rate_column(headers: list):
 
     raise Exception('Нет поля с часовой ставкой')
 
+
 def calculate_max_length_of_fields(data: list) -> int:
     """ Вычисление максимальной длины среди полей """
     max_length = 0

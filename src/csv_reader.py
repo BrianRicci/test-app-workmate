@@ -1,8 +1,10 @@
 class CSVReader:
+    """ Класс выполняющий функции чтения csv файла для отчета """
+
     def __print_message_about_read(self, file_path: str):
         """ Метод для вывода сообщении о чтении файла """
         slash_index = file_path.rindex('/')
-        
+
         print(f'Прочитан файл: {file_path[slash_index + 1:]}')
 
     def __get_headers(self, first_line: str) -> list:
@@ -19,9 +21,9 @@ class CSVReader:
             staff_salaries = list()
             for line in file:
                 staff_salaries.append(line.replace('\n', '').split(','))
-        
+
         self.__print_message_about_read(csv_file_path)
-        
+
         return {'headers': headers,
                 'staff_salaries': staff_salaries}
 

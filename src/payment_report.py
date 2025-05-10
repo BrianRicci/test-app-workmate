@@ -3,14 +3,23 @@ import services
 
 class Report:
     """ Родительский класс для отчетов """
+    
+    def __init__(self, headers: list, data: list):
+        self.headers = headers
+        self.data = data
+
+    def __prepare_headers(self, headers: list) -> list:
+        pass
+
+    def __prepare_staff_data(self) -> list:
+        pass
+
     def generate_report():
         pass
 
 
 class PayoutReport(Report):
-    def __init__(self, headers: list, data: list):
-        self.headers = headers
-        self.data = data
+    """ Класс отчета о выплатах """
 
     def __prepare_headers(self, headers: list) -> list:
         """ Метод для подготовки заголовков перед выводом в отчете """
@@ -20,7 +29,7 @@ class PayoutReport(Report):
         for header in headers:
             how_many_spaces_needed = ' ' * (required_length - len(header) + 1)
             output_headers.append(header + how_many_spaces_needed)
-        
+
         return output_headers
 
     def __prepare_staff_data(self) -> list:
@@ -38,15 +47,15 @@ class PayoutReport(Report):
             for key, value in output_row.items():
                 how_many_spaces_needed = ' ' * (required_length - len(value) + 1)
                 output_row[key] += how_many_spaces_needed
-            
+
             output_data.append(output_row)
-        
+
         return output_data
-    
+
     def __sort_columns(self, data: list) -> list:
         """ Метод для сортировки данных в требуемом порядке """
         hourly_rate_fieldname = services.detect_hourly_rate_column(self.headers)
-        
+
         for index, row in enumerate(data):
             data[index] = {
                 'id': row.get('id'),
@@ -57,7 +66,7 @@ class PayoutReport(Report):
                 'rate': row.get(hourly_rate_fieldname),
                 'payout': row.get('payout'),
             }
-        
+
         return data
 
     def generate_report(self) -> None:
