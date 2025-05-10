@@ -1,43 +1,27 @@
 from csv_reader import CSVReader
+from payment_report import PaymentReport
 import argparse
 
-
-class Report:
-
-    def generate_report():
-        pass
-
-
-class PaymentReport(Report):
-    def __init__(self, headers: list, data: dict):
-        self.data = data
-        self.headers = headers
-
-    def generate_report(self):
-        rows = list()
-        
-        for row in self.data:
-            row_str = ' '.join(row.values())
-            rows.append(row_str)
-
-        return rows
-
-
-def main():
-    reader = CSVReader()
-
-    headers, data = reader.get_data_from_csv('./test_data/data1.csv')
-    
-    pr = PaymentReport(headers, data)
-
-    print(pr.generate_report())
+def create_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filenames', nargs='+')
+    parser.add_argument('--report', '-r', help="Название отчета", required=True)
+ 
+    return parser
 
 
 if __name__ == '__main__':
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("--report", help="Введите название отчета", required=True)
-    # args = parser.parse_args()
+    parser = create_parser()
+    namespace = parser.parse_args()
 
-    # print(args)
+    reader = CSVReader()
+    
+    for filename in namespace.filenames:
+        headers, data = reader.get_staff_data_with_csv(filename)
+    
+        report = PaymentReport(headers, data)
 
-    main()
+        report.generate_report()
+
+
+# python main.py ../test_data/data3.csv ../test_data/data1.csv ../test_data/data2.csv -r payout
