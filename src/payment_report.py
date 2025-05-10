@@ -2,7 +2,7 @@ import services
 
 
 class Report:
-    """ Родительский класс для отчетов,  """
+    """ Родительский класс для отчетов """
     def generate_report():
         pass
 

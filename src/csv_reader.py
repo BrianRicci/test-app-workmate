@@ -1,10 +1,12 @@
 class CSVReader:
     def __print_message_about_read(self, file_path: str):
+        """ Метод для вывода сообщении о чтении файла """
         slash_index = file_path.rindex('/')
         
         print(f'Прочитан файл: {file_path[slash_index + 1:]}')
 
     def __get_headers(self, first_line: str) -> list:
+        """ Метод для чтения заголовков """
         headers = first_line.replace('\n', '').split(',')
 
         return headers
