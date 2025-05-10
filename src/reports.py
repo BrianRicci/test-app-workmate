@@ -1,4 +1,4 @@
-import services
+from src.services import detect_hourly_rate_column, calculate_max_length_of_fields
 
 
 class Report:
@@ -23,7 +23,7 @@ class PayoutReport(Report):
 
     def __prepare_headers(self, headers: list) -> list:
         """ Метод для подготовки заголовков перед выводом в отчете """
-        required_length = services.calculate_max_length_of_fields(self.data)
+        required_length = calculate_max_length_of_fields(self.data)
         output_headers = list()
 
         for header in headers:
@@ -34,9 +34,9 @@ class PayoutReport(Report):
 
     def __prepare_staff_data(self) -> list:
         """ Метод для подготовки данных перед выводом в отчете """
-        hourly_rate_fieldname = services.detect_hourly_rate_column(self.headers)
+        hourly_rate_fieldname = detect_hourly_rate_column(self.headers)
 
-        required_length = services.calculate_max_length_of_fields(self.data)
+        required_length = calculate_max_length_of_fields(self.data)
 
         output_data = list()
 
@@ -54,7 +54,7 @@ class PayoutReport(Report):
 
     def __sort_columns(self, data: list) -> list:
         """ Метод для сортировки данных в требуемом порядке """
-        hourly_rate_fieldname = services.detect_hourly_rate_column(self.headers)
+        hourly_rate_fieldname = detect_hourly_rate_column(self.headers)
 
         for index, row in enumerate(data):
             data[index] = {
