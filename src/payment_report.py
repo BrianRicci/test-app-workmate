@@ -7,7 +7,7 @@ class Report:
         pass
 
 
-class PaymentReport(Report):
+class PayoutReport(Report):
     def __init__(self, headers: list, data: list):
         self.headers = headers
         self.data = data
