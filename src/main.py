@@ -23,9 +23,13 @@ if __name__ == '__main__':
         match namespace.report:
             case 'payout':
                 report = PayoutReport(headers, data)
+                output_headers, output_data = report.generate_report()
 
-                report.generate_report()
-            
+                print(''.join(output_headers))
+
+                for row in output_data:
+                    print(''.join(row.values()))
+
             case _:
                 raise Exception('Такого вида отчета нет')
 

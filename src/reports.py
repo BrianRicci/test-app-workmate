@@ -69,14 +69,11 @@ class PayoutReport(Report):
 
         return data
 
-    def generate_report(self) -> None:
+    def generate_report(self) -> list | list:
         """ Метод для вывода отчета """
         prepared_data = self.__prepare_staff_data()
         output_data = self.__sort_columns(prepared_data)
 
         output_headers = self.__prepare_headers(output_data[0].keys())
 
-        print(''.join(output_headers))
-
-        for row in output_data:
-            print(''.join(row.values()))
+        return output_headers, output_data

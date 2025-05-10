@@ -1,7 +1,7 @@
 class CSVReader:
     """ Класс выполняющий функции чтения csv файла для отчета """
 
-    def __print_message_about_read(self, file_path: str):
+    def __print_message_about_read(self, file_path: str) -> None:
         """ Метод для вывода сообщении о чтении файла """
         slash_index = file_path.rindex('/')
 
